@@ -16,25 +16,42 @@ class Simulacion {
   async crearEquipos() {
     var generosEquipoA = await this.generarGenerosEquipo();
     var generosEquipoB = await this.generarGenerosEquipo();
-    
+
     var resistenciaHombres = await generarNumeroSpseudoaleatorios(
-      RESISTENCIA_MINIMA_HOMBRES,RESISTENCIA_MAXIMA_HOMBRES,40);
-    
+      RESISTENCIA_MINIMA_HOMBRES,
+      RESISTENCIA_MAXIMA_HOMBRES,
+      40
+    );
+
     var resistenciaMujeres = await generarNumeroSpseudoaleatorios(
-      RESISTENCIA_MINIMA_MUJERES,RESISTENCIA_MAXIMA_MUJERES,40);
-     
+      RESISTENCIA_MINIMA_MUJERES,
+      RESISTENCIA_MAXIMA_MUJERES,
+      40
+    );
+
     var suerteHombres = await generarNumeroSpseudoaleatorios(
-      SUERTE_MINIMA,SUERTE_MAXIMA,40);
-      
+      SUERTE_MINIMA,
+      SUERTE_MAXIMA,
+      40
+    );
+
     var suerteMujeres = await generarNumeroSpseudoaleatorios(
-      SUERTE_MINIMA,SUERTE_MAXIMA,40);
-      
+      SUERTE_MINIMA,
+      SUERTE_MAXIMA,
+      40
+    );
+
     var edadesA = await generarNumeroSpseudoaleatorios(
-      EDAD_MINIMA,EDAD_MAXIMA,20);
-      
+      EDAD_MINIMA,
+      EDAD_MAXIMA,
+      20
+    );
+
     var edadesB = await generarNumeroSpseudoaleatorios(
-      EDAD_MINIMA,EDAD_MAXIMA,20);
-      
+      EDAD_MINIMA,
+      EDAD_MAXIMA,
+      20
+    );
 
     /*console.log("Resistencia Hombres" , resistenciaHombres);
     console.log("Resistencia Mujeres" , resistenciaMujeres);
@@ -68,7 +85,7 @@ class Simulacion {
           )
         );
         resistenciaMujeres.shift();
-        suerteMujeres.shift()
+        suerteMujeres.shift();
       }
       if (generosEquipoB[i] === MASCULINO) {
         this.equipoB.push(
@@ -95,23 +112,22 @@ class Simulacion {
           )
         );
         resistenciaMujeres.shift();
-        suerteMujeres.shift()
+        suerteMujeres.shift();
       }
     }
     console.log(this.equipoA);
     console.log(this.equipoB);
   }
 
-  async generarGenerosEquipo(){
-    let generos = []
-    let listaNumeros = await generarNumeroSpseudoaleatorios(1,10,20);
+  async generarGenerosEquipo() {
+    let generos = [];
+    let listaNumeros = await generarNumeroSpseudoaleatorios(1, 10, 20);
     for (let i = 0; i < listaNumeros.length; i++) {
-        var entero = Math.floor(listaNumeros[i]); 
-        (entero%2)?generos.push(MASCULINO):generos.push(FEMENINO);
+      var entero = Math.floor(listaNumeros[i]);
+      entero % 2 ? generos.push(MASCULINO) : generos.push(FEMENINO);
     }
     return generos;
-
-}
+  }
 
   async asignarNuevaSuerte() {
     var suerteHombres = await generarNumeroSpseudoaleatorios(
@@ -153,16 +169,13 @@ class Simulacion {
     await this.crearEquipos();
 
     for (let i = 0; i < NUMERO_PARTIDAS; i++) {
-      var escenario = Math.floor(generateRandom(0,3));
+      console.log(`===================== Partida ${i+1} ======================`);
+      var escenario = Math.floor(generateRandom(0, 3));
       this.verificarEscenario(escenario);
-      var partida = new Partida(
-        escenario,
-        this.equipoA,
-        this.equipoB
-      );
+      var partida = new Partida(escenario, this.equipoA, this.equipoB);
       await partida.inicarPartida();
       var datos = await partida.resultados();
-      mostrarDatosPartida(datos,i);
+      mostrarDatosPartida(datos, i);
       this.equipoA = partida.equipoA;
       this.equipoB = partida.equipoB;
       await this.asignarNuevaSuerte();
@@ -177,7 +190,7 @@ class Simulacion {
     //Promedio de puntos de suerte ganados en cada una de las partidas
     //Promedio de puntos de experiencia ganados en cada una de las partidas
     await this.calcularPromedios();
-    //Jugador con más suerte en cada uno de los escenarios de juego 
+    //Jugador con más suerte en cada uno de los escenarios de juego
     this.listaJugadorMasSuerteEscenarios.push(
       await this.verificarJugadorMasSuerte(ESC_NO_VIENTO_NO_LLUVIA)
     );
@@ -190,7 +203,7 @@ class Simulacion {
     this.listaJugadorMasSuerteEscenarios.push(
       await this.verificarJugadorMasSuerte(ESC_VIENT_LLUVIA)
     );
-    //Jugador con más experiencia en cada uno de los escenarios de juego 
+    //Jugador con más experiencia en cada uno de los escenarios de juego
     this.listaJugadorMasExperienciaEscenarios.push(
       await this.verificarJugadorMasExperiencia(ESC_NO_VIENTO_NO_LLUVIA)
     );
@@ -203,7 +216,7 @@ class Simulacion {
     this.listaJugadorMasExperienciaEscenarios.push(
       await this.verificarJugadorMasExperiencia(ESC_VIENT_LLUVIA)
     );
-    //Equipo con más victorias en cada uno de los escenarios 
+    //Equipo con más victorias en cada uno de los escenarios
     this.listaEquiposMasVictoriasEscenarios.push(
       await this.verificarEquipoMasVictoriaEscenario(ESC_NO_VIENTO_NO_LLUVIA)
     );
@@ -213,14 +226,24 @@ class Simulacion {
     this.listaEquiposMasVictoriasEscenarios.push(
       await this.verificarEquipoMasVictoriaEscenario(ESC_LLUVIA)
     );
-    this.listaEquiposMasVictoriasEscenarios.push(await this.verificarEquipoMasVictoriaEscenario(ESC_VIENT_LLUVIA));
-    //Equipo con más victorias totales 
+    this.listaEquiposMasVictoriasEscenarios.push(
+      await this.verificarEquipoMasVictoriaEscenario(ESC_VIENT_LLUVIA)
+    );
+    //Equipo con más victorias totales
     this.equipoMasVictoriasTotales = await this.verificarEquipoMasVictoriaTotal();
-    //Género con más victorias en cada escenario 
-    this.generoMasVistoriasEscenarios.push(await this.verificarGeneroMasVictoriaEscenario(ESC_NO_VIENTO_NO_LLUVIA))
-    this.generoMasVistoriasEscenarios.push(await this.verificarGeneroMasVictoriaEscenario(ESC_VIENTO))
-    this.generoMasVistoriasEscenarios.push(await this.verificarGeneroMasVictoriaEscenario(ESC_LLUVIA))
-    this.generoMasVistoriasEscenarios.push(await this.verificarGeneroMasVictoriaEscenario(ESC_VIENT_LLUVIA))
+    //Género con más victorias en cada escenario
+    this.generoMasVistoriasEscenarios.push(
+      await this.verificarGeneroMasVictoriaEscenario(ESC_NO_VIENTO_NO_LLUVIA)
+    );
+    this.generoMasVistoriasEscenarios.push(
+      await this.verificarGeneroMasVictoriaEscenario(ESC_VIENTO)
+    );
+    this.generoMasVistoriasEscenarios.push(
+      await this.verificarGeneroMasVictoriaEscenario(ESC_LLUVIA)
+    );
+    this.generoMasVistoriasEscenarios.push(
+      await this.verificarGeneroMasVictoriaEscenario(ESC_VIENT_LLUVIA)
+    );
     //Genero con más victorias totales
     this.generoMasVictoriasTotales = await this.verificarGeneroMasVictoriaTotal();
   };
@@ -275,24 +298,9 @@ class Simulacion {
       }
     }
     arquero = await this.obtenerArqueroMayorExperiencia(listaArqueros);
-    if (arquero !== undefined) {
-      arquero = await this.buscarArquero(arquero.key)
-      return [arquero, escenario];
-    }
-    return [null, escenario];
-    
+    return arquero;
   };
 
-  buscarArquero = async(nombre) => {
-   for (let i = 0; i < NUMERO_PARTICIPANTE; i++) {
-     if(this.equipoA[i].nombre === nombre) {
-        return this.equipoA[i];
-     }else if(this.equipoB[i].nombre === nombre){
-       return this.equipoB[i];
-     }
-     
-   }
-  }
 
   agregarArqueroGanador = async (lista, arquero) => {
     if (lista.length !== 0) {
@@ -361,9 +369,11 @@ class Simulacion {
     let res = [];
     for (let i = 0; i < this.listaPartidas.length; i++) {
       if (this.listaPartidas[i].escenario === escenario) {
-        var listaRondas = this.listaPartidas[i].listaRondas
+        var listaRondas = this.listaPartidas[i].listaRondas;
         for (let j = 0; j < listaRondas.length; j++) {
-          listaRondas[j].arqueroGanador.genero === MASCULINO ? victoriaHombres += 1 : victoriaHombres += 2
+          listaRondas[j].arqueroGanador.genero === MASCULINO
+            ? (victoriaHombres += 1)
+            : (victoriaHombres += 2);
         }
       }
     }
@@ -376,9 +386,11 @@ class Simulacion {
     let victoriaHombres = 0;
     let victoriaMujeres = 0;
     for (let i = 0; i < this.listaPartidas.length; i++) {
-      var listaRondas = this.listaPartidas[i].listaRondas
+      var listaRondas = this.listaPartidas[i].listaRondas;
       for (let j = 0; j < listaRondas.length; j++) {
-        listaRondas[j].arqueroGanador.genero === MASCULINO ? victoriaHombres += 1 : victoriaHombres += 2
+        listaRondas[j].arqueroGanador.genero === MASCULINO
+          ? (victoriaHombres += 1)
+          : (victoriaHombres += 2);
       }
     }
     return victoriaHombres > victoriaMujeres
@@ -392,32 +404,53 @@ iniciarSimualcion = async () => {
   var simulacion = new Simulacion();
   await simulacion.iniciarSimualcion();
   await simulacion.calcularReportes();
-  console.log(
-    "Promedio de puntos de suerte ganados en cada una de las partidas "
-  );
+  console.log("Promedio de puntos de suerte ganados en cada una de las partidas ");
   console.log(simulacion.promedioSuerte);
-  mostrarPromedios(simulacion.promedioSuerte,"Promedio de puntos de suerte ganados en cada una de las partidas ");
-  console.log(
-    "Promedio de puntos de experiencia ganados en cada una de las partidas "
-  );
+  console.log("Promedio de puntos de experiencia ganados en cada una de las partidas ");
   console.log(simulacion.promedioExperiencia);
-  mostrarPromedios(simulacion.promedioExperiencia,"Promedio de puntos de experiencia ganados en cada una de las partidas ");
   console.log("Jugadores con mas suerte en cada escenario");
   console.log(simulacion.listaJugadorMasSuerteEscenarios);
-  mostrarReportesJugadoresSuerte(simulacion.listaJugadorMasSuerteEscenarios,"Jugadores con mas suerte en cada escenario");
   console.log("Jugadores con mas experiencia en cada escenario");
   console.log(simulacion.listaJugadorMasExperienciaEscenarios);
-  mostrarReportesJugadoresExperiencia(simulacion.listaJugadorMasExperienciaEscenarios,"Jugadores con mas experiencia en cada escenario");
   console.log("Equipos con mas victorias en cada escenario");
   console.log(simulacion.listaEquiposMasVictoriasEscenarios);
-  mostrarReportesEquiposVictoriaEscenario(simulacion.listaEquiposMasVictoriasEscenarios,"Equipos con mas victorias en cada escenario");
   console.log("Equipo con mas victorias totales");
   console.log(simulacion.equipoMasVictoriasTotales);
-  mostrarReportesEquipoVictoria(simulacion.equipoMasVictoriasTotales,"Equipo con mas victorias totales");
   console.log("Genero con mas victorias por escenario");
   console.log(simulacion.generoMasVistoriasEscenarios);
-  mostrarReportesGeneroVictoriaEscenario(simulacion.generoMasVistoriasEscenarios,"Genero con mas victorias por escenario");
-  console.log("Genero con mas victorias totales" );
+  console.log("Genero con mas victorias totales");
   console.log(simulacion.generoMasVictoriasTotales);
-  mostrarReportesGeneroVictoriaTotal(simulacion.generoMasVictoriasTotales,"Genero con mas victorias totales");
+
+  mostrarPromedios(
+    simulacion.promedioSuerte,
+    "Promedio de puntos de suerte ganados en cada una de las partidas "
+  );
+  mostrarPromedios(
+    simulacion.promedioExperiencia,
+    "Promedio de puntos de experiencia ganados en cada una de las partidas "
+  );
+  mostrarReportesJugadoresSuerte(
+    simulacion.listaJugadorMasSuerteEscenarios,
+    "Jugadores con mas suerte en cada escenario"
+  );
+  mostrarReportesJugadoresExperiencia(
+    simulacion.listaJugadorMasExperienciaEscenarios,
+    "Jugadores con mas experiencia en cada escenario"
+  );
+  mostrarReportesEquiposVictoriaEscenario(
+    simulacion.listaEquiposMasVictoriasEscenarios,
+    "Equipos con mas victorias en cada escenario"
+  );
+  mostrarReportesEquipoVictoria(
+    simulacion.equipoMasVictoriasTotales,
+    "Equipo con mas victorias totales"
+  );
+  mostrarReportesGeneroVictoriaEscenario(
+    simulacion.generoMasVistoriasEscenarios,
+    "Genero con mas victorias por escenario"
+  );
+  mostrarReportesGeneroVictoriaTotal(
+    simulacion.generoMasVictoriasTotales,
+    "Genero con mas victorias totales"
+  );
 };

@@ -128,7 +128,7 @@ class Ronda {
          var arqueroM = await this.obtenerMejorArqueroPuntaje(this.equipoB);
          this.arqueroGanador = arqueroH.puntaje > arqueroM.puntaje? arqueroH:arqueroM;
          this.arqueroGanador.subirExpereciencia();
-         this.experenciaAcumulada += 0.2;
+         this.experenciaAcumulada += 2;
          this.contadorAumentoExperiencia +=1;
          /*console.log(`Resultados : Masculino ${this.resultadoA} Femenino ${this.resultadoB}`);
          console.log(`Ganador ${this.equipoGanadaor}`);

@@ -89,17 +89,17 @@ class Partida {
         })
         .indexOf(arquero.nombre);
       if (indexArquero !== -1) {
-        this.listaGanadoresRonda[indexArquero].value += 0.2;
+        this.listaGanadoresRonda[indexArquero].value += 2;
       } else {
         this.listaGanadoresRonda.push({
           key: arquero.nombre,
-          value: 0.2,
+          value: 2,
         });
       }
     } else {
       this.listaGanadoresRonda.push({
         key: arquero.nombre,
-        value: 0.2,
+        value: 2,
       });
     }
   };

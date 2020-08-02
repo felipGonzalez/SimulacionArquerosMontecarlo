@@ -94,7 +94,7 @@ mostrarReportesJugadoresExperiencia = async(datos, mensaje) => {
     divreporte.appendChild(h4);
     for (let i = 0; i < datos.length; i++) {
         var p = document.createElement("p")
-        p.innerHTML = ESCENARIOS[datos[i][1]] + " Arquero "+ (datos[i][0] !== null ? datos[i][0].nombre +  " , " + datos[i][0].experiencia: "---")
+        p.innerHTML = ESCENARIOS[i] + " Arquero "+ (datos[i] !== undefined ? datos[i].key +  " , Experiencia Acumulada  " + datos[i].value : "---")
         divreporte.appendChild(p);
     }    
 }
