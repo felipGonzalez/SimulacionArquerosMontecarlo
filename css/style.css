@@ -1,0 +1,17 @@
+.container {
+  padding-top: 50px;
+}
+
+.table-div{
+  width: 90%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.divBlock {
+  margin-top: 20px;
+}
+
+#number {
+    text-decoration: none;
+}

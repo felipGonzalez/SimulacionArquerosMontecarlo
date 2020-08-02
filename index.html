@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Scripts -->
+
+  <script src="scripts/utilidades/lodash.js"></script>
+  <script src="scripts/utilidades/interfaz.js"></script>
+  <script src="scripts/metodos/Poker.js"></script>
+  <script src="scripts/metodos/chi^2.js"></script>
+  <script src="scripts/metodos/Medias.js"></script>
+  <script src="scripts/metodos/Varianza.js"></script>
+  <script src="scripts/metodos/Congruencial_lineal.js"></script>
+  <script src="scripts/modelos/Constantes.js"></script>
+  <script src="scripts/modelos/Arquero.js"></script>
+  <script src="scripts/modelos/Ronda.js"></script>
+  <script src="scripts/modelos/Partida.js"></script>
+
+  <script src="scripts/simulacion/main.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <title>Simulación Arqueros</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">SIMULACIÓN JUEGO DE ARQUERÍA</h4>
+      <p>Esta simulacion recrea un juego de arqueria, en la cual se simulan 500 partidas. Los equipos estan conformados
+        por 20 participantes, cada uno, conformados por hombres y mujeres con diferentes caracterisitcas.Los hombres son
+        mas resistentes pero la mujeres tienen mayor punteria</p>
+      <hr>
+      <p class="mb-0">La simualcion se realiza con el metodo de montecarlo</p>
+    </div>
+    <Button class="btn btn-primary btn-lg" onclick="iniciarSimualcion()"> Iniciar Simulacion </Button>
+
+    <div class="text-center" id="reporte">
+
+    </div>
+
+  </div>
+
+  <div class="table-div text-center" id="resultados">
+  </div>
+
+  <footer class="bg-dark text-light final fixed-bottom">
+    <div class="footer-copyright text-center py-3">© 2020 Mendez - Gonzalez - Lopez</div>
+  </footer>
+</body>
+
+</html>
